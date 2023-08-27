@@ -44,6 +44,10 @@ body{
     margin: auto;
 }
 
+.heading{
+    display: none;
+}
+
 .post{
     margin-top: 50px;
     display: flex;
@@ -51,6 +55,9 @@ body{
 
 .post-content{
     margin-left: 30px;
+}
+
+.post-preview{
     display: none;
 }
 

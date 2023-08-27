@@ -1,3 +1,4 @@
 $(document).ready(function(){
-    $('.post-content').show(1000);
+    $('.post-preview').slideDown(1000);
+    $('.heading').slideDown(1000);
 })
