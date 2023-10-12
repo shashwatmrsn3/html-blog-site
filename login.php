@@ -1,5 +1,8 @@
 <?php
 
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +12,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style/style.css" />
 </head>
 
 
@@ -32,15 +35,15 @@
     <div class="content">
         <h1>Login</h1>
 
-        <form action="">
+        <form method="POST">
             <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+            <input type="text" placeholder="Enter Username" name="username" required>
 
             <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+            <input type="password" placeholder="Enter Password" name="password" required>
 
-            <input type="submit" name="submit"/>
-           
+            <input type="submit" name="submit" />
+
 
         </form>
 
