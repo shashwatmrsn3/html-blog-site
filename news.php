@@ -23,11 +23,11 @@
         </div>
         <div class="menu">
             <ul>
-                <li>Home</li>
-                <li>About</li>
-                <li>Contact</li>
-                <li><a href="news.html">News</a></li>
-                <li>Login</li>
+                <li><a href="index.php">Home</a></li>
+                <li><a href="about.php">About</a></li>
+                <li><a href = "contact.php">Contact</a></li>
+                <li><a href="news.php">News</a></li>
+                <li><a href="login.php">Login</a></li>
             </ul>
         </div>
     </div>
