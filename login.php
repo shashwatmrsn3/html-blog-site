@@ -1,7 +1,21 @@
 <?php
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+include 'utils/dbconnect.php';
 
+$err = "";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $query = "select * from blog.user where username = '$username' and password = '$password'";
+    $result = mysqli_query($conn,$query);
+    if(mysqli_num_rows($result) > 0){
+        session_start();
+        $_SESSION['username'] = $username;
+        header("location:adminpanel.php");
+        $err = "";
+    }else{
+        $err = "invalid username/password";
+    }
 }
 ?>
 
@@ -27,15 +41,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <li><a href="about.php">About</a></li>
                 <li><a href="contact.php">Contact</a></li>
                 <li><a href="news.php">News</a></li>
-                <li><a href="login.php">Login</a></li>
             </ul>
         </div>
     </div>
 
     <div class="content">
-        <h1>Login</h1>
-
         <form method="POST">
+            <p style="color:red"><?php echo $err?></p>
             <label for="uname"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" required>
 
