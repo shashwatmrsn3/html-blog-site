@@ -47,12 +47,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     <div class="content">
         <form method="POST">
-            <p style="color:red"><?php echo $err?></p>
             <label for="uname"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" required>
 
             <label for="psw"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="password" required>
+            <p style="color:red"><?php echo $err?></p>
 
             <input type="submit" name="submit" />
 
