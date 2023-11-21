@@ -2,18 +2,22 @@
 
 include 'utils/dbconnect.php';
 
+session_start();
+if ($_SESSION['username'] != null) {
+    header("location:adminpanel.php");
+}
 $err = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
     $query = "select * from blog.user where username = '$username' and password = '$password'";
-    $result = mysqli_query($conn,$query);
-    if(mysqli_num_rows($result) > 0){
+    $result = mysqli_query($conn, $query);
+    if (mysqli_num_rows($result) > 0) {
         session_start();
         $_SESSION['username'] = $username;
         header("location:adminpanel.php");
         $err = "";
-    }else{
+    } else {
         $err = "invalid username/password";
     }
 }
@@ -46,13 +50,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </div>
 
     <div class="content">
+        <h2>Login</h2>
+
         <form method="POST">
             <label for="uname"><b>Username</b></label>
             <input type="text" placeholder="Enter Username" name="username" required>
 
             <label for="psw"><b>Password</b></label>
             <input type="password" placeholder="Enter Password" name="password" required>
-            <p style="color:red"><?php echo $err?></p>
+            <p style="color:red">
+                <?php echo $err ?>
+            </p>
 
             <input type="submit" name="submit" />
 

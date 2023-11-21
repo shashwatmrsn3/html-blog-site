@@ -118,7 +118,7 @@ table {
   }
 
   form {
-    max-width: 400px;
+    max-width: 100%;
     margin: 0 auto;
     background-color: #ffffff;
     padding: 20px;

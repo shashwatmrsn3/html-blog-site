@@ -1,6 +1,29 @@
 <?php
 
+include './utils/dbconnect.php';
+session_start();
+if ($_SESSION['username'] == null) {
+    header("location:login.php");
+}
 
+$uploadDir = "uploads/";
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $title = $_POST['title'];
+    $content = $_POST['content'];
+    $image = $_FILES['image'];
+    $uniqueFilename = uniqid() . '_' . $image['name'];
+    $uploadFile = $uploadDir . $uniqueFilename;
+
+    move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile);
+
+    $author = $_SESSION['username'];
+    $query = "insert into blog.post(title, content, image, author) 
+    values('$title','$content','$uniqueFilename', '$author')";
+
+    mysqli_query($conn,$query);
+    header("location:adminpanel.php");
+}
 
 ?>
 
@@ -29,7 +52,8 @@
         </div>
     </div>
     <div class="content">
-        <form action="process_form.php" method="post" enctype="multipart/form-data">
+        <h2>Add post</h2>
+        <form  method="post" enctype="multipart/form-data">
             <label for="title">Title:</label>
             <input type="text" name="title" id="title" required>
             <label for="content">Content:</label>

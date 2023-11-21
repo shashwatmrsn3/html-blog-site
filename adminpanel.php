@@ -1,8 +1,13 @@
 <?php
+
+include './utils/dbconnect.php';
 session_start();
 if ($_SESSION['username'] == null) {
     header("location:login.php");
 }
+
+$query = "select title,content,author,date,image from blog.post";
+$result = mysqli_query($conn, $query);
 ?>
 
 <!DOCTYPE html>
@@ -42,24 +47,34 @@ if ($_SESSION['username'] == null) {
         <table class="table">
             <tr>
                 <th>Title</th>
-                <th>Post date</th>
+                <th>Date</th>
                 <th>Author</th>
+                <th>Image</th>
+                <th>Update</th>
+                <th>Delete</th>
             </tr>
-            <tr>
-                <td>Some title</td>
-                <td>10/14/2023</td>
-                <td>Ram</td>
-            </tr>
-            <tr>
-                <td>Some title</td>
-                <td>10/14/2023</td>
-                <td>Ram</td>
-            </tr>
-            <tr>
-                <td>Some title</td>
-                <td>10/14/2023</td>
-                <td>Ram</td>
-            </tr>
+            <?php
+            while ($r = mysqli_fetch_assoc($result)) {
+                ?>
+                <tr>
+                    <td>
+                        <?php echo $r['title']; ?>
+                    </td>
+                    <td>
+                        <?php echo $r['date']; ?>
+                    </td>
+                    <td>
+                        <?php echo $r['author']; ?>
+                    </td>
+                    <td>
+                        <img style="height:100px;width:100px" src="uploads/<?php echo $r['image']; ?>" />
+                    </td>
+                    <td>Update</td>
+                    <td>Delete</td>
+                </tr>
+                <?php
+            }
+            ?>
         </table>
     </div>
 
