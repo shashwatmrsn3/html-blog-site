@@ -1,31 +1,18 @@
 <?php
+    include './utils/dbconnect.php';
+    session_start();
+    if ($_SESSION['username'] == null) {
+        header("location:login.php");
+    }
+    $id = $_GET['id'];
+    $query = "select id,title,content,author,date,image from blog.post where id = '$id'";
+    $result = mysqli_query($conn, $query);
+    $assoarr = mysqli_fetch_assoc($result);
+    $title = $assoarr['title'];
+    $content = $assoarr['content'];
+   
 
-include './utils/dbconnect.php';
-session_start();
-if ($_SESSION['username'] == null) {
-    header("location:login.php");
-}
-
-$uploadDir = "uploads/";
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $title = $_POST['title'];
-    $content = $_POST['content'];
-    $image = $_FILES['image'];
-    $uniqueFilename = uniqid() . '_' . $image['name'];
-    $uploadFile = $uploadDir . $uniqueFilename;
-
-    move_uploaded_file($_FILES['image']['tmp_name'], $uploadFile);
-
-    $author = $_SESSION['username'];
-    $query = "insert into blog.post(title, content, image, author) 
-    values('$title','$content','$uniqueFilename', '$author')";
-
-    mysqli_query($conn,$query);
-    header("location:adminpanel.php");
-}
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -51,12 +38,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </div>
     </div>
     <div class="content">
-        <h2>Add post</h2>
+        <h2>Edit post</h2>
         <form  method="post" enctype="multipart/form-data">
             <label for="title">Title:</label>
-            <input type="text" name="title" id="title" required>
+            <input type="text" name="title" id="title" value = <?php echo $title ?> required>
             <label for="content">Content:</label>
-            <textarea name="content" id="content" rows="4" required></textarea>
+            <textarea name="content" id="content" value = <?php echo $content ?> rows="4" required></textarea>
             <label for="image">Image:</label>
             <input type="file" name="image" id="image" accept="image/*" required>
             <input type="submit" value="Submit">

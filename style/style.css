@@ -58,6 +58,11 @@ body {
     display: flex;
 }
 
+.post-image img{
+    height: 200px;
+    width: 300px;
+}
+
 .post-content {
     margin-left: 30px;
 }

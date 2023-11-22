@@ -1,3 +1,11 @@
+<?php
+
+include './utils/dbconnect.php';
+
+$query = "select id,title,content,author,date,image from blog.post";
+$result = mysqli_query($conn, $query);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,15 +14,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style/style.css" />
-    <script
-        src="https://code.jquery.com/jquery-3.7.0.js"
-        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
-        crossorigin="anonymous">
-    </script>
+    <script src="https://code.jquery.com/jquery-3.7.0.js"
+        integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM=" crossorigin="anonymous">
+        </script>
     <script src="js/script.js">
-        
+
     </script>
-  </head>
+</head>
 
 <body>
     <div class="navbar">
@@ -25,7 +31,7 @@
             <ul>
                 <li><a href="index.php">Home</a></li>
                 <li><a href="about.php">About</a></li>
-                <li><a href = "contact.php">Contact</a></li>
+                <li><a href="contact.php">Contact</a></li>
                 <li><a href="news.php">News</a></li>
             </ul>
         </div>
@@ -35,67 +41,31 @@
     </div>
     <div class="content">
         <h1 class="heading">Trending Posts</h1>
-
-        <div class="post">
-            <div class="post-image">
-                <img src="laptop.jpg" />
-            </div>
-            <div class="post-content">
-                <h2>Laptop price in nepal</h2>
-                <p>Author Name . Date</p>
-                <div class="post-preview">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi eligendi, nisi ratione ad velit
-                        voluptatum, quidem blanditiis nostrum, distinctio in fugiat mollitia sed. Debitis dicta fugiat
-                        consectetur quam tempore nostrum!</p>
+        <?php
+        while ($r = mysqli_fetch_assoc($result)) {
+            ?>
+            <div class="post">
+                <div class="post-image">
+                    <img src="uploads/<?php echo $r['image']; ?>" />
                 </div>
-                
-            </div>
-        </div>
+                <div class="post-content">
+                    <h2>
+                        <?php echo $r['title']; ?>
+                    </h2>
+                    <p>
+                        <?php echo $r['author']; ?> .
+                        <?php echo $r['date']; ?>
+                    </p>
+                    <div class="post-preview">
+                        <p> <?php echo $r['content']; ?> </p>
+                    </div>
 
-        <div class="post">
-            <div class="post-image">
-                <img src="laptop.jpg" />
-            </div>
-            <div class="post-content">
-                <h2>Laptop price in nepal</h2>
-                <p>Author Name . Date</p>
-                <div class="post-preview">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi eligendi, nisi ratione ad velit
-                        voluptatum, quidem blanditiis nostrum, distinctio in fugiat mollitia sed. Debitis dicta fugiat
-                        consectetur quam tempore nostrum!</p>
                 </div>
             </div>
-        </div>
+            <?php
+        }
+        ?>
 
-        <div class="post">
-            <div class="post-image">
-                <img src="laptop.jpg" />
-            </div>
-            <div class="post-content">
-                <h2>Laptop price in nepal</h2>
-                <p>Author Name . Date</p>
-                <div class="post-preview">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi eligendi, nisi ratione ad velit
-                        voluptatum, quidem blanditiis nostrum, distinctio in fugiat mollitia sed. Debitis dicta fugiat
-                        consectetur quam tempore nostrum!</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="post">
-            <div class="post-image">
-                <img src="laptop.jpg" />
-            </div>
-            <div class="post-content">
-                <h2>Laptop price in nepal</h2>
-                <p>Author Name . Date</p>
-                <div class="post-preview">
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi eligendi, nisi ratione ad velit
-                        voluptatum, quidem blanditiis nostrum, distinctio in fugiat mollitia sed. Debitis dicta fugiat
-                        consectetur quam tempore nostrum!</p>
-                </div>
-            </div>
-        </div>
 
     </div>
 
@@ -103,4 +73,5 @@
         Copyright@MyBlog
     </footer>
 </body>
+
 </html>

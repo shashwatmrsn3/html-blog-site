@@ -6,7 +6,7 @@ if ($_SESSION['username'] == null) {
     header("location:login.php");
 }
 
-$query = "select title,content,author,date,image from blog.post";
+$query = "select id,title,content,author,date,image from blog.post";
 $result = mysqli_query($conn, $query);
 ?>
 
@@ -69,8 +69,8 @@ $result = mysqli_query($conn, $query);
                     <td>
                         <img style="height:100px;width:100px" src="uploads/<?php echo $r['image']; ?>" />
                     </td>
-                    <td>Update</td>
-                    <td>Delete</td>
+                    <td><a href="update.php?id=<?php echo $r['id'] ?>">Update</a></td>
+                    <td><a href="delete.php?id=<?php echo $r['id'] ?>">Delete</a></td>
                 </tr>
                 <?php
             }
