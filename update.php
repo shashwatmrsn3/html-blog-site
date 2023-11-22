@@ -10,7 +10,6 @@
     $assoarr = mysqli_fetch_assoc($result);
     $title = $assoarr['title'];
     $content = $assoarr['content'];
-   
 
 ?>
 <!DOCTYPE html>
@@ -41,9 +40,9 @@
         <h2>Edit post</h2>
         <form  method="post" enctype="multipart/form-data">
             <label for="title">Title:</label>
-            <input type="text" name="title" id="title" value = <?php echo $title ?> required>
+            <input type="text" name="title" id="title" value = "<?php echo $title; ?>" required>
             <label for="content">Content:</label>
-            <textarea name="content" id="content" value = <?php echo $content ?> rows="4" required></textarea>
+            <textarea name="content" id="content"  required><?php echo $content; ?></textarea>
             <label for="image">Image:</label>
             <input type="file" name="image" id="image" accept="image/*" required>
             <input type="submit" value="Submit">
